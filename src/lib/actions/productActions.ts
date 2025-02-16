@@ -1,5 +1,3 @@
-// lib/actions/productActions.ts
-
 "use server";
 
 import { db } from "@/lib/db";
@@ -12,12 +10,9 @@ export interface ProductInput {
   price: number;
   stock: number;
   categoryId: number;
-  images: any; // JSON formatında resim URL'leri
+  images: any;
 }
 
-/**
- * Yeni bir ürün oluşturur.
- */
 export async function createProduct(productData: ProductInput) {
   try {
     const newProduct = await db
@@ -38,9 +33,6 @@ export async function createProduct(productData: ProductInput) {
   }
 }
 
-/**
- * Belirli bir ürünün stok bilgisini günceller.
- */
 export async function updateProductStock(productId: number, newStock: number) {
   try {
     const updatedProduct = await db

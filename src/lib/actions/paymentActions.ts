@@ -1,13 +1,8 @@
-// lib/actions/paymentActions.ts
-
 "use server";
 
 import { db } from "@/lib/db";
 import { payments } from "@/lib/db/schema";
 
-/**
- * Ödeme kaydı oluşturur.
- */
 export interface PaymentInput {
   orderId: number;
   paymentMethod: string;

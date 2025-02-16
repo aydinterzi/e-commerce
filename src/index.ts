@@ -10,12 +10,11 @@ import {
   orderItems,
   payments,
   reviews,
-} from "./lib/db/schema"; // Dosya yolunu projenize göre ayarlayın
+} from "./lib/db/schema";
 
 const db = drizzle(process.env.DATABASE_URL!);
 
 async function main() {
-  // --- KATEGORİLER ---
   const newCategory1: typeof categories.$inferInsert = {
     name: "Electronics",
     slug: "electronics",
@@ -45,11 +44,10 @@ async function main() {
   const [books] = await db.insert(categories).values(newCategory3).returning();
   console.log("Categories inserted:", electronics, clothing, books);
 
-  // --- ÜRÜNLER ---
   const newProduct1: typeof products.$inferInsert = {
     name: "Smartphone XYZ",
     description: "Latest smartphone with amazing features.",
-    price: 500000, // kuruş cinsinden
+    price: 500000,
     stock: 100,
     categoryId: electronics.id,
     images: JSON.stringify(["https://example.com/smartphone.jpg"]),
@@ -68,7 +66,6 @@ async function main() {
   const [product2] = await db.insert(products).values(newProduct2).returning();
   console.log("Products inserted:", product1, product2);
 
-  // --- ÜRÜN VARYANTLARI ---
   const newVariant1: typeof productVariants.$inferInsert = {
     productId: product1.id,
     variantName: "Color",
@@ -125,8 +122,7 @@ async function main() {
     variant4
   );
 
-  // --- SEPET VE SEPET KALEMLERİ ---
-  const userId = "123e4567-e89b-12d3-a456-426614174000"; // Örnek kullanıcı ID (Clerk tarafından sağlanan UUID)
+  const userId = "123e4567-e89b-12d3-a456-426614174000";
   const newCart: typeof carts.$inferInsert = {
     userId: userId,
   };
@@ -144,7 +140,6 @@ async function main() {
   const [cartItem] = await db.insert(cartItems).values(newCartItem).returning();
   console.log("Cart item inserted:", cartItem);
 
-  // --- SİPARİŞLER VE SİPARİŞ KALEMLERİ ---
   const newOrder: typeof orders.$inferInsert = {
     userId: userId,
     total: product1.price,
@@ -178,7 +173,6 @@ async function main() {
     .returning();
   console.log("Order item inserted:", orderItem);
 
-  // --- ÖDEMELER ---
   const newPayment: typeof payments.$inferInsert = {
     orderId: order.id,
     paymentMethod: "stripe",
@@ -189,7 +183,6 @@ async function main() {
   const [payment] = await db.insert(payments).values(newPayment).returning();
   console.log("Payment inserted:", payment);
 
-  // --- YORUMLAR ---
   const newReview: typeof reviews.$inferInsert = {
     productId: product1.id,
     userId: userId,

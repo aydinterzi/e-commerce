@@ -1,17 +1,12 @@
-// lib/actions/reviewActions.ts
-
 "use server";
 
 import { db } from "@/lib/db";
 import { reviews } from "@/lib/db/schema";
 
-/**
- * Yeni bir ürün yorumu oluşturur.
- */
 export interface ReviewInput {
   productId: number;
-  userId: string; // Clerk kullanıcı kimliği (UUID)
-  rating: number; // 1-5 arası puanlama
+  userId: string;
+  rating: number;
   comment?: string;
 }
 

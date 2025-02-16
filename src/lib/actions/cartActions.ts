@@ -1,5 +1,3 @@
-// lib/actions/cartActions.ts
-
 "use server";
 
 import { db } from "@/lib/db";
@@ -15,9 +13,6 @@ export interface CartItemInput {
   totalPrice: number;
 }
 
-/**
- * Sepete yeni bir ürün ekler.
- */
 export async function addCartItem(item: CartItemInput) {
   try {
     const newItem = await db
@@ -38,15 +33,11 @@ export async function addCartItem(item: CartItemInput) {
   }
 }
 
-/**
- * Sepet kaleminin miktarını günceller.
- */
 export async function updateCartItemQuantity(
   cartItemId: number,
   quantity: number
 ) {
   try {
-    // Not: totalPrice hesaplamasını backend'de veya client'ta yapabilirsiniz.
     const updatedItem = await db
       .update(cartItems)
       .set({ quantity })
@@ -59,9 +50,6 @@ export async function updateCartItemQuantity(
   }
 }
 
-/**
- * Sepet kalemini siler.
- */
 export async function removeCartItem(cartItemId: number) {
   try {
     const deletedItem = await db

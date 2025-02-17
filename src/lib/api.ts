@@ -12,7 +12,7 @@ const dummyProducts: Product[] = [
     id: "2",
     name: "T-Shirt",
     description: "Comfortable cotton t-shirt.",
-    price: 50000,
+    price: 5,
     image: "https://example.com/tshirt.jpg",
   },
   {

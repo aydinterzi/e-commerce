@@ -2,7 +2,8 @@
 
 import React from "react";
 import { useCartStore } from "@/state/cartStore";
-import { Button } from "@/components/ui/button"; // ShadCN UI Button bileşeni
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export default function CartPage() {
   const { items, removeItem, updateItemQuantity, clearCart } = useCartStore();
@@ -87,9 +88,11 @@ export default function CartPage() {
               <Button variant="destructive" onClick={clearCart}>
                 Sepeti Temizle
               </Button>
-              <Button className="bg-blue-600 hover:bg-blue-700 text-white">
-                Ödeme Yap
-              </Button>
+              <Link href="/checkout">
+                <Button className="bg-blue-600 hover:bg-blue-700 text-white">
+                  Ödeme Yap
+                </Button>
+              </Link>
             </div>
           </div>
         </div>

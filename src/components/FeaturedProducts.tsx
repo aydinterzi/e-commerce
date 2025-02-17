@@ -11,7 +11,7 @@ const dummyProducts = [
   {
     id: "2",
     name: "T-Shirt",
-    price: 50000,
+    price: 5,
     image: "https://example.com/tshirt.jpg",
   },
   {

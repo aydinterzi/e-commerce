@@ -15,6 +15,7 @@ export default function CheckoutPage() {
     postalCode: "",
     country: "",
   });
+  const [loading, setLoading] = useState(false);
 
   const totalPrice = items.reduce(
     (sum, item) => sum + item.price * item.quantity,
@@ -25,9 +26,37 @@ export default function CheckoutPage() {
     setShippingInfo({ ...shippingInfo, [e.target.name]: e.target.value });
   };
 
-  const handlePayment = () => {
-    alert("Ödeme işlemi başlatıldı.");
-    clearCart();
+  const handlePayment = async () => {
+    setLoading(true);
+    try {
+      const mappedItems = items.map((item) => ({
+        name: item.name,
+        amount: item.price,
+        quantity: item.quantity,
+      }));
+
+      const res = await fetch("/api/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          items: mappedItems,
+          shippingInfo,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        alert("Ödeme başlatılamadı.");
+      }
+    } catch (error) {
+      console.error("Ödeme hatası:", error);
+      alert("Bir hata oluştu, lütfen tekrar deneyin.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -142,9 +171,10 @@ export default function CheckoutPage() {
           </div>
           <Button
             onClick={handlePayment}
+            disabled={loading}
             className="w-full bg-blue-600 hover:bg-blue-700 text-white"
           >
-            Ödeme Yap
+            {loading ? "Yükleniyor..." : "Ödeme Yap"}
           </Button>
         </div>
       </div>

@@ -47,7 +47,7 @@ async function main() {
   const newProduct1: typeof products.$inferInsert = {
     name: "Smartphone XYZ",
     description: "Latest smartphone with amazing features.",
-    price: 500000,
+    price: 5,
     stock: 100,
     categoryId: electronics.id,
     images: JSON.stringify(["https://example.com/smartphone.jpg"]),
@@ -56,7 +56,7 @@ async function main() {
   const newProduct2: typeof products.$inferInsert = {
     name: "T-Shirt",
     description: "Comfortable cotton t-shirt.",
-    price: 50000,
+    price: 5,
     stock: 200,
     categoryId: clothing.id,
     images: JSON.stringify(["https://example.com/tshirt.jpg"]),

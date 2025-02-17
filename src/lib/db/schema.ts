@@ -63,7 +63,6 @@ export const orderItems = pgTable("order_items", {
     .references(() => products.id)
     .notNull(),
   variantId: integer("variant_id").references(() => productVariants.id),
-
   quantity: integer("quantity").notNull().default(1),
   unitPrice: integer("unit_price").notNull(),
   totalPrice: integer("total_price").notNull(),

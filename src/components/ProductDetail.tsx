@@ -1,5 +1,6 @@
 import React from "react";
 import { formattedPrice } from "@/lib/utils";
+import AddToCartButton from "./AddToCartButton";
 
 interface Product {
   id: string;
@@ -28,9 +29,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
           <p className="text-2xl font-semibold mb-6">
             {formattedPrice(product.price)}
           </p>
-          <button className="bg-green-500 text-white px-6 py-3 rounded hover:bg-green-600 transition-colors">
-            Add to Cart
-          </button>
+          <AddToCartButton product={product} />
         </div>
       </div>
     </div>
